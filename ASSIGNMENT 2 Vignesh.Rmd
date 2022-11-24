@@ -1,0 +1,166 @@
+---
+title: "MACHINE LEARNING ASSIGNMENT 2"
+author: "VIGNESH"
+date: "2022-09-15"
+output: html_document
+---
+# install the required package.
+```{r}
+library(MASS)
+library(ISLR)
+```
+
+1. In this exercise you will create some simulated data and will fit simple linear regression models to it. Make sure to use set.seed(1) prior to starting part (a) to ensure consistent results.rnorm
+
+a.	Using the rnorm() function, create a vector, “x”, containing 100 observations drawn from a N(0,1) distribution. This represents a feature, X.
+
+# Creating a vector with values drawn from a random distribution of 100 values.
+# randomly set a distribution of 100 values.using rnorm  
+```{r}
+set.seed(1)
+Random <- rnorm(100)
+x
+```
+
+b.	Using the rnorm() function, create a vector, “eps”, containing 100 observations drawn from a N(0,0.25) distribution.
+
+#eps is a vectorname with a standard deviation of 
+#eps is variance error value.
+#Ranomly 100 values with new eps vector with 0.0.25 standard diviation
+
+```{r}
+eps = rnorm(100, 0, 0.25)
+eps
+```
+
+c.	Using “x” and “eps”, generate a vector “y” according to the model
+Y=−1+0.5X+ε.
+What is the length of the vector “y” ? What are the values of β0 and β1 in this linear model ?
+#y=β0+β1x+e,Where
+#The values of β0 and β1 are −1 and 0.5 respectively.
+# with −1 and 0.5 with lm model y=β0+β1x
+```{r}
+y = -1 + 0.5*x + eps
+y
+```
+
+#The Length of Y = 100
+
+```{r}
+length(y)
+```
+ 
+d.	Create a scatter plot displaying the relationship between “x” and “y”. Comment on what you observe.
+#For X and Y there is a positive relationship in linear
+#Most Values lies Between 0 to 1.
+#we create a scatterplot using plot 
+
+```{r}
+plot(x, y)
+```
+
+e.	Fit a least squares linear model to predict “y” using “x”. Comment on the model obtained. How do β^0 and β^1 compare to β0 and β1 ?
+
+#The values of β^0 and β^1 are pretty close to β0 and β1. The model has a large F-statistic with a near-zero p-value so the null hypothesis can be rejected.
+```{r}
+fit<-lm(y~x)
+fit
+summary(fit)
+```
+
+f.	Display the least squares line on the scatter plot obtained in (d). Draw the population regression line on the plot, in a different color. Use the legend() function to create an appropriate legend.
+# Create a plot of x,y.
+#color is blue,with 1, 0.5-
+```{r}
+plot(x, y)
+abline(fit,col = "blue")
+abline(-1, 0.5, col = "red")
+legend("bottomright", c("Least Square", "Regression"), col = c("red", "blue"), lty = c(1, 1))
+```
+
+
+2.  This problem involves the “Boston” data set, which we saw in the lab for this chapter. We will now try to predict per capita crime rate using the other variables in this data set. In other words, per capita crime rate is the response, and the other variables are the predictors.
+
+# install the boston dataset.get the details using ? symbol
+```{r}
+Boston
+?Boston
+```
+
+
+a.	For each predictor, fit a simple linear regression model to predict the response. Describe your results. In which of the models is there a statistically significant association between the predictor and the response ? Create some plots to back up your assertions.
+# summary between crim ~ zn see the linear model.
+```{r}
+zn <- lm(crim ~ zn,Boston)
+summary(zn)
+```
+# summary between crim ~ indus see the linear model
+```{r}
+indus <- lm(crim ~ indus,Boston)
+summary(indus)
+```
+# summary between crim ~ chas see the linear model
+```{r}
+chas <- lm(crim ~ chas,Boston)
+summary(chas)
+```
+# summary between crim ~ nox see the linear model
+```{r}
+nox <- lm(crim ~ nox,Boston)
+summary(nox)
+```
+# summary between crim ~ rm see the linear model
+```{r}
+rm <- lm(crim ~ rm,Boston)
+summary(rm)
+```
+# summary between crim ~ age see the linear model
+```{r}
+age <- lm(crim ~ age,Boston)
+summary(age)
+```
+# summary between crim ~ dis see the linear model
+```{r}
+dis <- lm(crim ~ dis,Boston)
+summary(dis)
+```
+# summary between crim ~ rad see the linear model
+```{r}
+rad <- lm(crim ~ rad,Boston)
+summary(rad)
+```
+# summary between crim ~ tax see the linear model
+```{r}
+tax <- lm(crim ~ tax,Boston)
+summary(tax)
+```
+# summary between crim ~ ptradio see the linear model
+```{r}
+ptratio <- lm(crim ~ ptratio,Boston)
+summary(ptratio)
+```
+# summary between crim ~ black see the linear model
+```{r}
+black <- lm(crim ~ black,Boston)
+summary(black)
+```
+# summary between crim ~ lstat see the linear model
+```{r}
+lstat <- lm(crim ~ lstat,Boston)
+summary(lstat)
+```
+# summary between crim ~ medv see the linear model
+```{r}
+medv <- lm(crim ~ medv,Boston)
+summary(medv)
+```
+
+b.	Fit a multiple regression model to predict the response using all of the predictors. Describe your results. For which predictors can we reject the null hypothesis H0:βj=0 ?
+
+#We may reject the null hypothesis for “zn”, “dis”, “rad”, “black” and “medv”.
+```{r}
+fit.bos <- lm(crim ~ .,Boston)
+fit.bos
+summary(fit.bos)
+```
+
